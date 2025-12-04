@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Khushi Kumari | Frontend Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0f172a;
+      --accent: #6366f1;
+      --accent-soft: rgba(99, 102, 241, 0.2);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --card: #020617;
+      --border: #1f2937;
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Floating gradient background blobs */
+    .blob {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      z-index: -1;
+      animation: float 18s infinite alternate ease-in-out;
+    }
+    .blob:nth-child(1) {
+      top: -80px;
+      left: -120px;
+      background: #6366f1;
+    }
+    .blob:nth-child(2) {
+      bottom: -120px;
+      right: -120px;
+      background: #ec4899;
+      animation-duration: 22s;
+    }
+    @keyframes float {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      to {
+        transform: translate3d(40px, -40px, 0) scale(1.1);
+      }
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.7);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      box-shadow: 0 0 18px rgba(129, 140, 248, 0.8);
+      animation: pulseDot 1.5s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    .nav-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: var(--muted);
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6366f1, #ec4899);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Layout */
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-underline {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #6366f1, #ec4899);
+      border-radius: 999px;
+      margin-bottom: 20px;
+      animation: slideIn 0.8s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { width: 0; opacity: 0; }
+      to { width: 60px; opacity: 1; }
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 32px;
+      align-items: center;
+      min-height: 70vh;
+    }
+
+    .hero-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #6366f1, #ec4899, #f97316);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shimmer 5s infinite linear;
+      background-size: 200% auto;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: -200% center; }
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      max-width: 520px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .badge i {
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      transition: transform 0.2s ease, box-shadow 0.2s ease,
+        background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      color: white;
+      box-shadow: 0 12px 28px rgba(79, 70, 229, 0.36);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(79, 70, 229, 0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta-item i {
+      color: var(--accent);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .card-hero {
+      position: relative;
+      border-radius: 26px;
+      background: radial-gradient(circle at top, #111827 0, #020617 50%, #020617 100%);
+      padding: 20px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+    }
+
+    .card-hero::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: conic-gradient(from 200deg, rgba(99, 102, 241, 0.7), transparent, rgba(236, 72, 153, 0.7), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
+
+    .card-hero:hover::before {
+      opacity: 0.3;
+    }
+
+    .hero-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 24px;
+      border: 2px solid rgba(148, 163, 184, 0.4);
+      background: linear-gradient(135deg, #1f2937, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-avatar span {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-role {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .hero-location {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .hero-timeline {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+
+    .hero-socials {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .hero-socials a {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+      font-size: 1rem;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .hero-socials a:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      color: white;
+    }
+
+    .hero-floating-badge {
+      position: absolute;
+      right: -6px;
+      top: 30%;
+      transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.9);
+      animation: floatBadge 3.4s ease-in-out infinite;
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(-60%) translateX(-6px); }
+    }
+
+    .hero-floating-badge i {
+      color: var(--success);
+    }
+
+    /* Generic cards / layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .pill i {
+      color: var(--accent);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .list-dot li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    .list-dot li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+    }
+
+    /* Skills */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    /* Timeline */
+    .timeline {
+      border-left: 1px solid rgba(148, 163, 184, 0.4);
+      padding-left: 16px;
+    }
+
+    .timeline-item {
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -8.5px;
+      top: 3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #6366f1;
+      border: 2px solid #020617;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.4);
+    }
+
+    .timeline-role {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .timeline-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 14px 16px 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      border-color: rgba(129, 140, 248, 0.5);
+    }
+
+    .project-pill {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .project-pill i {
+      color: var(--accent);
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .project-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+
+    .project-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 20px;
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .contact-info {
+      font-size: 0.9rem;
+    }
+
+    .contact-info i {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    .footer {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 26px;
+    }
+
+    /* Scroll reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-right {
+        order: -1;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        min-height: auto;
+      }
+      .grid-2,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      main {
+        padding-inline: 16px;
+      }
+      .card-hero {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated blobs -->
+  <div class="blob"></div>
+  <div class="blob"></div>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="nav">
+      <div class="nav-left">
+        <div class="logo-dot"></div>
+        <div class="nav-title">Khushi Kumari</div>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="hero-left reveal">
+        <p class="tagline">Frontend developer • BCA student</p>
+        <h1 class="hero-title">
+          Hi, <span>I'm Khushi</span>
+        </h1>
+        <p class="hero-subtitle">
+          Highly motivated and results-oriented frontend developer, eager to build impactful software solutions, grow with a collaborative team, and make a positive impact in the IT industry.
+        </p>
+
+        <div class="hero-badges">
+          <div class="badge">
+            <i class="bx bx-code-alt"></i>
+            Frontend development
+          </div>
+          <div class="badge">
+            <i class="bx bx-brain"></i>
+            Data & Python
+          </div>
+          <div class="badge">
+            <i class="bx bx-world"></i>
+            Bengaluru, India
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            <i class="bx bx-send"></i>
+            Hire me
+          </a>
+          <a href="mailto:khushiii.6900@gmail.com" class="btn btn-outline">
+            <i class="bx bx-mail-send"></i>
+            Email
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <i class="bx bx-book-content"></i>
+            Bachelor’s in Computer Application (2022–2025)
+          </div>
+          <div class="hero-meta-item">
+            <i class="bx bx-group"></i>
+            Team player • Continuous learner
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right reveal">
+        <div class="card-hero">
+          <div class="hero-avatar">
+            <!-- Replace with your photo if you want -->
+            <span>KK</span>
+          </div>
+          <div class="hero-role">Frontend Developer Intern</div>
+          <div class="hero-location">Remote · Campalin Innovations · Bengaluru</div>
+
+          <div class="hero-tags">
+            <span class="hero-tag">HTML</span>
+            <span class="hero-tag">CSS</span>
+            <span class="hero-tag">React.js</span>
+            <span class="hero-tag">Prototyping</span>
+          </div>
+
+          <p style="font-size:0.78rem; color:var(--muted); margin-top:8px;">
+            Collaborated with a remote team to build web pages, create prototypes, and work with React-based server connections.
+          </p>
+
+          <div class="hero-timeline">
+            <span>Actively seeking roles</span>
+            <span>Bengaluru · India</span>
+          </div>
+
+          <div class="hero-socials">
+            <a href="https://www.linkedin.com/in/khushi-kumari-651a97305" target="_blank" rel="noreferrer">
+              <i class="bx bxl-linkedin"></i>
+            </a>
+            <a href="mailto:khushiii.6900@gmail.com">
+              <i class="bx bx-envelope"></i>
+            </a>
+            <a href="tel:+918826483491">
+              <i class="bx bx-phone"></i>
+            </a>
+          </div>
+
+          <div class="hero-floating-badge">
+            <i class="bx bx-bulb"></i>
+            <span>Open to frontend & data roles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="reveal">
+      <h2 class="section-title">About</h2>
+      <div class="section-underline"></div>
+      <p class="tagline">
+        Curious, self-driven BCA student with strong fundamentals in frontend development and a growing interest in data and analytics.
+      </p>
+      <br />
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Profile</div>
+          <p style="font-size:0.85rem; color:var(--muted);">
+            I am looking for an opportunity to apply my skills to real-world projects, work effectively in fast-paced environments, and continuously learn new technologies. I enjoy solving problems, collaborating with teams, and contributing to meaningful digital experiences.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">Highlights</div>
+          <ul class="list-dot">
+            <li>Remote frontend intern experience at Campalin Innovations.</li>
+            <li>Hands-on academic projects in Android, Java, PHP, MySQL, and Python.</li>
+            <li>Certified in HTML/CSS, Python for Data Science, AI & DS foundation, cybersecurity, and data analysis with Python.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="reveal">
+      <h2 class="section-title">Experience</h2>
+      <div class="section-underline"></div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-role">Remote Intern · Campalin Innovations</div>
+          <div class="timeline-meta">Frontend · Bengaluru · Remote</div>
+          <ul class="list-dot">
+            <li>Collaborated with team members to build and refine web pages using HTML and CSS.</li>
+            <li>Contributed to server connections and integrations using React.js.</li>
+            <li>Helped create prototypes for new web pages, focusing on usability and visual consistency.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="reveal">
+      <h2 class="section-title">Education</h2>
+      <div class="section-underline"></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Bachelor’s in Computer Application</div>
+          <div class="card-subtitle">K.R. Mangalam University · Gurgaon · 07/2022 – 07/2025</div>
+          <p style="font-size:0.8rem; color:var(--muted);">
+            Built strong fundamentals in computer science, programming, and software development with exposure to real-world projects and teamwork.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">Schooling</div>
+          <div class="card-subtitle">Army Public School · Bengaluru</div>
+          <ul class="list-dot">
+            <li>Twelfth Grade · 75%</li>
+            <li>Tenth Grade · 70%</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="reveal">
+      <h2 class="section-title">Projects</h2>
+      <div class="section-underline"></div>
+      <p class="tagline">
+        A selection of academic and practice projects that showcase my skills across frontend, Android, Java, PHP, MySQL, and Python.
+      </p>
+      <br />
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-pill">
+            <i class="bx bx-alarm"></i>
+            Android · Java
+          </div>
+          <div class="project-title">Alarm Clock (Android Studio)</div>
+          <p class="project-desc">
+            Android application that allows users to configure alarms with a simple and intuitive interface, built using Android Studio.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Android Studio</span>
+            <span class="project-tag">Java</span>
+            <span class="project-tag">UI Design</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-pill">
+            <i class="bx bx-grid"></i>
+            Java
+          </div>
+          <div class="project-title">Tic-Tac-Toe Game</div>
+          <p class="project-desc">
+            Classic two-player Tic-Tac-Toe game implemented in Java with a simple interface to practice logic and game state management.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Game Logic</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-pill">
+            <i class="bx bx-route"></i>
+            Team Project
+          </div>
+          <div class="project-title">OptiRoute</div>
+          <p class="project-desc">
+            Team project focused on designing an optimized routing solution, emphasizing collaboration, problem-solving, and system design thinking.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Teamwork</span>
+            <span class="project-tag">Problem Solving</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-pill">
+            <i class="bx bx-bus"></i>
+            PHP · MySQL · Python
+          </div>
+          <div class="project-title">Online Bus Reservation System</div>
+          <p class="project-desc">
+            Web-based system for managing bus reservations, developed using PHP and MySQL, with Python used for related data processing tasks.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">PHP</span>
+            <span class="project-tag">MySQL</span>
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Web App</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills & Certificates -->
+    <section id="skills" class="reveal">
+      <h2 class="section-title">Skills & Certificates</h2>
+      <div class="section-underline"></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Technical Skills</div>
+          <div class="chips">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">React.js (basics)</span>
+            <span class="chip">Python</span>
+            <span class="chip">SQL</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">Power BI</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Languages & Interests</div>
+          <ul class="list-dot">
+            <li>Languages: English, Hindi, Tamil</li>
+            <li>Interests: Travelling, Reading</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Certificates</div>
+          <ul class="list-dot">
+            <li>Basics of HTML/CSS</li>
+            <li>Python 101 for Data Science</li>
+            <li>Foundation to AI & DS</li>
+            <li>Introduction to Cybersecurity</li>
+            <li>Data Analysis Using Python</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="reveal">
+      <h2 class="section-title">Contact</h2>
+      <div class="section-underline"></div>
+      <div class="contact-grid">
+        <div class="card">
+          <div class="card-title">Let’s work together</div>
+          <p style="font-size:0.85rem; color:var(--muted); margin-bottom:10px;">
+            Open to internships and entry-level roles in frontend development, data, and related domains. Feel free to reach out for opportunities, collaborations, or just a quick chat.
+          </p>
+          <div class="contact-label">Email</div>
+          <div class="contact-info">
+            <i class="bx bx-envelope"></i> khushiii.6900@gmail.com
+          </div>
+          <br />
+          <div class="contact-label">Phone</div>
+          <div class="contact-info">
+            <i class="bx bx-phone"></i> +91-8826483491
+          </div>
+        </div>
+        <div class="card">
+          <div class="contact-label">Location</div>
+          <div class="contact-info">
+            <i class="bx bx-map"></i> Bengaluru, India
+          </div>
+          <br />
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-info">
+            <i class="bx bxl-linkedin"></i>
+            <a href="https://www.linkedin.com/in/khushi-kumari-651a97305" target="_blank" rel="noreferrer">
+              linkedin.com/in/khushi-kumari-651a97305
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        © 2025 · Designed & built by Khushi Kumari
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Simple scroll reveal
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    reveals.forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
